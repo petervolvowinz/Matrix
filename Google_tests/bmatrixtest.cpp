@@ -130,7 +130,19 @@ TEST(bmatrix,Multiply){
     }
 }
 
+//Testing that number of matrix A cols not equal with matrix B rows should throw exception.
 TEST(bmatrix,invalid_multiplication){
     Matrix A(10,10);
+    Matrix B(9,10);
 
+    try{
+        Matrix C = A.Multiply(B);
+        FAIL();
+    }
+    catch(std::invalid_argument const& err ){
+       EXPECT_EQ(std::string("cols in A not equal rows in B"),err.what());
+    }
+    catch(...){
+        FAIL() << "Expected std::invalid_argument";
+    }
 }

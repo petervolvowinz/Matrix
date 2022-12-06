@@ -84,12 +84,12 @@ Matrix Matrix::Multiply(Matrix B){
         throw std::invalid_argument("cols in A not equal rows in B");
     }
 
-    Matrix C = Matrix(this -> n, this -> m);
+    Matrix C = Matrix(this -> n, B.m); // The product has the dim = (Rows_A,Cols_B)
 
     for (int i = 1; i <= this -> n; i++) {
         bool sum = false;
-        for (int j = 1; j <= this -> m; j++) {
-            for (int k = 1; k <= this -> n; k++) {
+        for (int j = 1; j <= B.m; j++) {
+            for (int k = 1; k <= B.n; k++) {
                 sum = (sum || (this -> GetIndex(i, k) && B.GetIndex(k, j)));
             }
             C.SetIndex(i, j, sum);
