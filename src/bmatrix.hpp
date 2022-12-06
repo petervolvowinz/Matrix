@@ -36,7 +36,15 @@ public:
     tuple<int,int,int> GetSizeInBytesBits(){
         return make_tuple(0,0,0);
     }
-    
+
+    Matrix operator + (Matrix const &B){
+        this ->Add(B);
+    }
+
+    Matrix operator *(Matrix const &B){
+        this -> add(B);
+    }
+
     Matrix  (int n,int m);         // construct a Matrix with specified size
     Matrix(const Matrix &a, bitVector bits);       // copy constructor
     ~Matrix ();                     // destructor

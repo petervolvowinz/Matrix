@@ -153,9 +153,109 @@ TEST(bmatrix,new_dimensions){
 
     Matrix C = A.Multiply(B);
     auto [n,m] = C.GetDimensions();
-    
+
     EXPECT_EQ(n,1);
     EXPECT_EQ(m,1);
 
+}
+
+TEST(bmatrix,addition){
+    Matrix A(4,4);
+
+    A.SetIndex(1,1,false);
+    A.SetIndex(1,2,false);
+    A.SetIndex(1,3,true);
+    A.SetIndex(1,4,false);
+
+    A.SetIndex(2,1,false);
+    A.SetIndex(2,2,false);
+    A.SetIndex(2,3,false);
+    A.SetIndex(2,4,true);
+
+    A.SetIndex(3,1,false);
+    A.SetIndex(3,2,false);
+    A.SetIndex(3,3,true);
+    A.SetIndex(3,4,true);
+
+    A.SetIndex(4,1,false);
+    A.SetIndex(4,2,false);
+    A.SetIndex(4,3,false);
+    A.SetIndex(4,4,false);
+
+    Matrix B(4,4);
+
+    B.SetIndex(1,1,false);
+    B.SetIndex(1,2,true);
+    B.SetIndex(1,3,false);
+    B.SetIndex(1,4,false);
+
+    B.SetIndex(2,1,true);
+    B.SetIndex(2,2,false);
+    B.SetIndex(2,3,false);
+    B.SetIndex(2,4,false);
+
+    B.SetIndex(3,1,false);
+    B.SetIndex(3,2,false);
+    B.SetIndex(3,3,true);
+    B.SetIndex(3,4,false);
+
+    B.SetIndex(4,1,false);
+    B.SetIndex(4,2,true);
+    B.SetIndex(4,3,false);
+    B.SetIndex(4,4,false);
+
+    Matrix R(4,4);
+
+    R.SetIndex(1,1,false);
+    R.SetIndex(1,2,true);
+    R.SetIndex(1,3,true);
+    R.SetIndex(1,4,false);
+
+    R.SetIndex(2,1,true);
+    R.SetIndex(2,2,false);
+    R.SetIndex(2,3,false);
+    R.SetIndex(2,4,true);
+
+    R.SetIndex(3,1,false);
+    R.SetIndex(3,2,false);
+    R.SetIndex(3,3,true);
+    R.SetIndex(3,4,true);
+
+    R.SetIndex(4,1,false);
+    R.SetIndex(4,2,true);
+    R.SetIndex(4,3,false);
+    R.SetIndex(4,4,false);
+
+    Matrix C = A.Add(B);
+
+    for (int i = 1; i <=4; i++){
+        for(int j=1;j <=4; j++){
+            EXPECT_EQ(C.GetIndex(i,j),R.GetIndex(i,j));
+        }
+    }
+
+}
+
+TEST(bmatrix,invalidadd){
+    Matrix A(10,10);
+    Matrix B(9,10);
+
+    try{
+        Matrix C = A.Add(B);
+        FAIL();
+    }
+    catch(std::invalid_argument const& err ){
+        EXPECT_EQ(std::string("A and B is not the same size , addition not valid"),err.what());
+    }
+    catch(...){
+        FAIL() << "Expected std::invalid_argument";
+    }
+}
+
+TEST(bmatrix,addoverload){
+
+}
+
+TEST(bmatrix,muloverload){
 
 }
