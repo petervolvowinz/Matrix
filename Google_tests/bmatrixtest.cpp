@@ -146,3 +146,16 @@ TEST(bmatrix,invalid_multiplication){
         FAIL() << "Expected std::invalid_argument";
     }
 }
+
+TEST(bmatrix,new_dimensions){
+    Matrix A(1,3);
+    Matrix B(3,1);
+
+    Matrix C = A.Multiply(B);
+    auto [n,m] = C.GetDimensions();
+    
+    EXPECT_EQ(n,1);
+    EXPECT_EQ(m,1);
+
+
+}
