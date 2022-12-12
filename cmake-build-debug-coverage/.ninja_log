@@ -1,0 +1,15 @@
+# ninja log v5
+0	606	1670887307260210360	CMakeFiles/matrix.dir/src/bitvector.cpp.o	f61fc557faf6187f
+1	639	1670887307292592710	CMakeFiles/matrix.dir/src/bmatrix.cpp.o	2c68e7c9eda9efa4
+639	712	1670887307378140000	libmatrix.a	1c1e61378893cfc2
+3	811	1670887307466028913	Google_tests/lib/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o	d51b45ba2f0e3422
+1	918	1670887307573497499	Google_tests/CMakeFiles/Google_Tests_run.dir/bitvectortest.cpp.o	77b3bba18ceb3f5b
+2	1005	1670887307660543975	Google_tests/CMakeFiles/Google_Tests_run.dir/bmatrixtest.cpp.o	605bb6cfb4e92b83
+3	3645	1670887310291830535	Google_tests/lib/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o	d31a53276aed709a
+3645	3729	1670887310394987000	lib/libgtest.a	a077bb15124b83bc
+3729	3786	1670887310452319000	lib/libgtest_main.a	c5c8add6d0f4e50f
+3786	3908	1670887310571597116	Google_tests/Google_Tests_run	f68df00e1c829083
+0	570	1670887312126885944	CMakeFiles/Matrix.dir/main.cpp.o	27c0e1947448bef2
+1	592	1670887312155554173	CMakeFiles/Matrix.dir/src/bitvector.cpp.o	6d0c39525425f9e4
+1	629	1670887312191295896	CMakeFiles/Matrix.dir/src/bmatrix.cpp.o	cb150875c575cd9
+630	695	1670887312268426588	Matrix	f71f421283a31007
