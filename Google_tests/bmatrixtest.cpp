@@ -2,8 +2,87 @@
 // Created by PWINZELL on 11/16/22.
 //
 
+#include <tuple>
 #include "gtest/gtest.h"
 #include "../src/bmatrix.hpp"
+
+// Data helper class
+class AdditionTest{
+private:
+        Matrix A;
+        Matrix B;
+        Matrix R;
+public:
+    AdditionTest():A(4,4),B(4,4),R(4,4){
+
+        A.SetIndex(1,1,false);
+        A.SetIndex(1,2,false);
+        A.SetIndex(1,3,true);
+        A.SetIndex(1,4,false);
+
+        A.SetIndex(2,1,false);
+        A.SetIndex(2,2,false);
+        A.SetIndex(2,3,false);
+        A.SetIndex(2,4,true);
+
+        A.SetIndex(3,1,false);
+        A.SetIndex(3,2,false);
+        A.SetIndex(3,3,true);
+        A.SetIndex(3,4,true);
+
+        A.SetIndex(4,1,false);
+        A.SetIndex(4,2,false);
+        A.SetIndex(4,3,false);
+        A.SetIndex(4,4,false);
+
+        B.SetIndex(1,1,false);
+        B.SetIndex(1,2,true);
+        B.SetIndex(1,3,false);
+        B.SetIndex(1,4,false);
+
+        B.SetIndex(2,1,true);
+        B.SetIndex(2,2,false);
+        B.SetIndex(2,3,false);
+        B.SetIndex(2,4,false);
+
+        B.SetIndex(3,1,false);
+        B.SetIndex(3,2,false);
+        B.SetIndex(3,3,true);
+        B.SetIndex(3,4,false);
+
+        B.SetIndex(4,1,false);
+        B.SetIndex(4,2,true);
+        B.SetIndex(4,3,false);
+        B.SetIndex(4,4,false);
+
+        R.SetIndex(1,1,false);
+        R.SetIndex(1,2,true);
+        R.SetIndex(1,3,true);
+        R.SetIndex(1,4,false);
+
+        R.SetIndex(2,1,true);
+        R.SetIndex(2,2,false);
+        R.SetIndex(2,3,false);
+        R.SetIndex(2,4,true);
+
+        R.SetIndex(3,1,false);
+        R.SetIndex(3,2,false);
+        R.SetIndex(3,3,true);
+        R.SetIndex(3,4,true);
+
+        R.SetIndex(4,1,false);
+        R.SetIndex(4,2,true);
+        R.SetIndex(4,3,false);
+        R.SetIndex(4,4,false);
+
+    }
+
+    tuple<Matrix,Matrix,Matrix> GetMatrices(){
+        return make_tuple(A,B,R);
+    }
+
+};
+
 
 TEST(bmatrix,GetDimensions){
     Matrix A(10,10);
@@ -62,7 +141,7 @@ TEST(bmatrix,SetGetIndex){
 
 }
 
-TEST(bmatrix,Addition){
+/*TEST(bmatrix,Addition){
 
     Matrix A(4,4);
     A.SetIndex(1,3,true);
@@ -94,7 +173,7 @@ TEST(bmatrix,Addition){
         }
     }
 
-}
+}*/
 
 TEST(bmatrix,Multiply){
     Matrix A(3,3);
@@ -160,71 +239,8 @@ TEST(bmatrix,new_dimensions){
 }
 
 TEST(bmatrix,addition){
-    Matrix A(4,4);
-
-    A.SetIndex(1,1,false);
-    A.SetIndex(1,2,false);
-    A.SetIndex(1,3,true);
-    A.SetIndex(1,4,false);
-
-    A.SetIndex(2,1,false);
-    A.SetIndex(2,2,false);
-    A.SetIndex(2,3,false);
-    A.SetIndex(2,4,true);
-
-    A.SetIndex(3,1,false);
-    A.SetIndex(3,2,false);
-    A.SetIndex(3,3,true);
-    A.SetIndex(3,4,true);
-
-    A.SetIndex(4,1,false);
-    A.SetIndex(4,2,false);
-    A.SetIndex(4,3,false);
-    A.SetIndex(4,4,false);
-
-    Matrix B(4,4);
-
-    B.SetIndex(1,1,false);
-    B.SetIndex(1,2,true);
-    B.SetIndex(1,3,false);
-    B.SetIndex(1,4,false);
-
-    B.SetIndex(2,1,true);
-    B.SetIndex(2,2,false);
-    B.SetIndex(2,3,false);
-    B.SetIndex(2,4,false);
-
-    B.SetIndex(3,1,false);
-    B.SetIndex(3,2,false);
-    B.SetIndex(3,3,true);
-    B.SetIndex(3,4,false);
-
-    B.SetIndex(4,1,false);
-    B.SetIndex(4,2,true);
-    B.SetIndex(4,3,false);
-    B.SetIndex(4,4,false);
-
-    Matrix R(4,4);
-
-    R.SetIndex(1,1,false);
-    R.SetIndex(1,2,true);
-    R.SetIndex(1,3,true);
-    R.SetIndex(1,4,false);
-
-    R.SetIndex(2,1,true);
-    R.SetIndex(2,2,false);
-    R.SetIndex(2,3,false);
-    R.SetIndex(2,4,true);
-
-    R.SetIndex(3,1,false);
-    R.SetIndex(3,2,false);
-    R.SetIndex(3,3,true);
-    R.SetIndex(3,4,true);
-
-    R.SetIndex(4,1,false);
-    R.SetIndex(4,2,true);
-    R.SetIndex(4,3,false);
-    R.SetIndex(4,4,false);
+    AdditionTest testDataAdd;
+    auto[A,B,R] = testDataAdd.GetMatrices();
 
     Matrix C = A.Add(B);
 
@@ -254,6 +270,16 @@ TEST(bmatrix,invalidadd){
 
 TEST(bmatrix,addoverload){
 
+    AdditionTest testDataAdd;
+    auto[A,B,C] = testDataAdd.GetMatrices();
+
+    Matrix D = A + B;
+
+    for (int i = 1; i <= 4 ; i++){
+        for (int j = 1; j <= 4 ; j++){
+            EXPECT_EQ(D.GetIndex(i,j),C.GetIndex(i,j));
+        }
+    }
 }
 
 TEST(bmatrix,muloverload){

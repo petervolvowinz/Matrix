@@ -38,11 +38,11 @@ public:
     }
 
     Matrix operator + (Matrix const &B){
-        this ->Add(B);
+        return this ->Add(B);
     }
 
     Matrix operator *(Matrix const &B){
-        this -> add(B);
+        return this -> Multiply(B);
     }
 
     Matrix  (int n,int m);         // construct a Matrix with specified size
