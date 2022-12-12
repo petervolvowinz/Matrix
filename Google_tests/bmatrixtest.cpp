@@ -83,6 +83,42 @@ public:
 
 };
 
+class MultplicationTest{
+private:
+    Matrix A;
+    Matrix B;
+    Matrix C;
+
+public:
+    MultplicationTest():A(3,3),B(3,3),C(3,3){
+
+        A.SetIndex(1,1,true);
+        A.SetIndex(1,2,true);
+        A.SetIndex(1,3,true);
+        A.SetIndex(2,1,true);
+        A.SetIndex(2,3,true);
+        A.SetIndex(3,2,true);
+
+        B.SetIndex(1,1,true);
+        B.SetIndex(2,3,true);
+        B.SetIndex(3,1,true);
+        B.SetIndex(3,2,true);
+        B.SetIndex(3,3,true);
+
+        C.SetIndex(1,1,true);
+        C.SetIndex(1,2,true);
+        C.SetIndex(1,3,true);
+        C.SetIndex(2,1,true);
+        C.SetIndex(2,2,true);
+        C.SetIndex(2,3,true);
+        C.SetIndex(3,3,true);
+    }
+
+    tuple<Matrix,Matrix,Matrix> GetMatrices(){
+        return make_tuple(A,B,C);
+    }
+
+};
 
 TEST(bmatrix,GetDimensions){
     Matrix A(10,10);
@@ -141,64 +177,10 @@ TEST(bmatrix,SetGetIndex){
 
 }
 
-/*TEST(bmatrix,Addition){
-
-    Matrix A(4,4);
-    A.SetIndex(1,3,true);
-    A.SetIndex(2,4,true);
-    A.SetIndex(3,3,true);
-    A.SetIndex(3,4,true);
-
-    Matrix B(4,4);
-    A.SetIndex(1,2,true);
-    A.SetIndex(2,1,true);
-    A.SetIndex(3,3,true);
-    A.SetIndex(4,2,true);
-
-    Matrix D = A.Add(B);
-
-    Matrix C(4,4);
-    C.SetIndex(1,2,true);
-    C.SetIndex(1,3,true);
-    C.SetIndex(2,1,true);
-    C.SetIndex(2,4,true);
-    C.SetIndex(3,2,true);
-    C.SetIndex(3,3,true);
-    C.SetIndex(3,4,true);
-    C.SetIndex(4,2,true);
-
-    for (int i = 1; i <= 4 ; i++){
-        for (int j = 1; j <= 4 ; j++){
-            EXPECT_EQ(D.GetIndex(i,j),C.GetIndex(i,j));
-        }
-    }
-
-}*/
 
 TEST(bmatrix,Multiply){
-    Matrix A(3,3);
-    A.SetIndex(1,1,true);
-    A.SetIndex(1,2,true);
-    A.SetIndex(1,3,true);
-    A.SetIndex(2,1,true);
-    A.SetIndex(2,3,true);
-    A.SetIndex(3,2,true);
-
-    Matrix B(3,3);
-    B.SetIndex(1,1,true);
-    B.SetIndex(2,3,true);
-    B.SetIndex(3,1,true);
-    B.SetIndex(3,2,true);
-    B.SetIndex(3,3,true);
-
-    Matrix C(3,3);
-    C.SetIndex(1,1,true);
-    C.SetIndex(1,2,true);
-    C.SetIndex(1,3,true);
-    C.SetIndex(2,1,true);
-    C.SetIndex(2,2,true);
-    C.SetIndex(2,3,true);
-    C.SetIndex(3,3,true);
+    MultplicationTest testDataMul;
+    auto[A,B,C] = testDataMul.GetMatrices();
 
     Matrix D = A.Multiply(B);
 
@@ -283,5 +265,14 @@ TEST(bmatrix,addoverload){
 }
 
 TEST(bmatrix,muloverload){
+    MultplicationTest testDataMul;
+    auto[A,B,C] = testDataMul.GetMatrices();
 
+    Matrix D = A * B;
+
+    for (int i = 1; i <= 3 ; i++){
+        for (int j = 1; j <= 3 ; j++){
+            EXPECT_EQ(D.GetIndex(i,j),C.GetIndex(i,j));
+        }
+    }
 }
