@@ -146,14 +146,17 @@ TEST(bmatrix,CopyConstr){
 }
 
 TEST(bmatrix,SetGetIndex){
+
+    Matrix B(10,10);
+    B.SetIndex(1,1,true);
+
     Matrix A(5,5);
     for (int i = 1; i <= 5; i++){
         for (int j = 1; j <= 5; j++){
             A.SetIndex(i,j,true);
         }
     }
-
-    // A.PrintMatrix();
+    
     for (int i = 1; i <= 5; i++){
         for (int j = 1; j <= 5; j++){
             EXPECT_EQ(true,A.GetIndex(i,j));
@@ -223,9 +226,7 @@ TEST(bmatrix,new_dimensions){
 TEST(bmatrix,addition){
     AdditionTest testDataAdd;
     auto[A,B,R] = testDataAdd.GetMatrices();
-
     Matrix C = A.Add(B);
-
     for (int i = 1; i <=4; i++){
         for(int j=1;j <=4; j++){
             EXPECT_EQ(C.GetIndex(i,j),R.GetIndex(i,j));

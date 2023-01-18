@@ -54,8 +54,9 @@ bool Matrix::GetIndex(int i,int j){
         
         
     int bytes = sizeof(uint64_t);
-    int bitnumber = j % (bytes * 8);
+
     int index = (i * this -> m) + j;
+    int bitnumber = index % (bytes * 8);
     int bitindex = index / (bytes * 8);
     
     return int ( bits.getBitar(bitindex) & (1 << bitnumber)) > 0;
@@ -107,8 +108,8 @@ Matrix Matrix::Add(Matrix B){
     
     Matrix C = Matrix(this -> n, this -> m);
     
-    for (int i = 1; i < this -> n; i++) {
-        for (int j = 1; j < this -> m; j++) {
+    for (int i = 1; i <= this -> n; i++) {
+        for (int j = 1; j <= this -> m; j++) {
             C.SetIndex(i, j, this -> GetIndex(i, j) || B.GetIndex(i, j));
         }
     }

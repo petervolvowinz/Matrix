@@ -24,7 +24,7 @@ bitvectortest.cpp
 bmatrixtest.cpp
 ```
 
-Running tests with coverage, select from the *RUN* and *Run with coverage* , if not built with coverage flags just select 
+Running tests with coverage, select from the main menu *RUN* and *Run with coverage* , if not built with coverage flags just select 
 *fix and run* and the IDE will take care of it and build and run the tests.
 
 ![Test with coverage](coverage.png)
